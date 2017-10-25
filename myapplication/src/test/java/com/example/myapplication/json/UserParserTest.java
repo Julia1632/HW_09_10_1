@@ -45,7 +45,8 @@ public class UserParserTest {
         final UserParserFactory userParserFactory= new UserParserFactory();
         // final IUser user=userParserFactory.createParser(SOURCE).parse();
         InputStream mockedInputStream= Mocks.stream("user.json");
-        when(mHttpClient.request(Matchers.anyString())).thenReturn(mockedInputStream);
+        doReturn(mockedInputStream).when(mHttpClient).request(Matchers.anyString());
+        // when(mHttpClient.request(Matchers.anyString())).thenReturn(mockedInputStream);
         InputStream response=mHttpClient.request("https://backend/getuser");
         IUser userjson = userParserFactory.createParserFile(response).parse();
 
